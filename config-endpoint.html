@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    RED.nodes.registerType('config-endpoint',{
+        category: 'config',
+        defaults: {
+            name: {value:""},
+            ipaddr: {value:"",required:true, validate:function(value) {
+                if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(value)){
+                    return (true)
+                } 
+                return (false)
+                } 
+            }
+        },
+        credentials: {
+            username: {type:"text",required:true},
+            password: {type:"password",required:true}
+        },
+        label: function() {
+            return this.name||"config-endpoint'";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="config-endpoint">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Optional name to identify the endpoint">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-ipaddr"><i class="fa fa-server"></i> IP address</label>
+        <input type="text" id="node-config-input-ipaddr" placeholder="Endpoint IP address">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-ssl"><i class="fa fa-lock"></i> SSL</label>
+        <input type="checkbox" id="node-config-input-ssl">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-username"><i class="fa fa-lock"></i> Username</label>
+        <input type="text" id="node-config-input-username" placeholder="Username">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-password"><i class="fa fa-lock"></i> Password</label>
+        <input type="password" id="node-config-input-password" placeholder="Password">
+    </div>
+</script>
+

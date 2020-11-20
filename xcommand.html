@@ -1,0 +1,81 @@
+<script type="text/javascript">
+    RED.nodes.registerType('xcommand',{
+        category: 'telepresence',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            endpoint: {value:"", type:"config-endpoint"},
+            service: {value:""},
+            data: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "arrow-in.svg",
+        label: function() {
+            return this.name||"xcommand";
+        },
+        oneditprepare: function() {
+            $("#node-input-data").typedInput({
+                type:"json",
+                types:["json"]
+            });
+        }
+    });
+
+
+</script>
+
+<script type="text/html" data-template-name="xcommand">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Optional name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-endpoint"><i class="fa fa-tag"></i> Endpoint</label>
+        <input type="text" id="node-input-endpoint">
+    </div>
+    <div class="form-row">
+        <label for="node-input-service"><i class="fa fa-tag"></i> Service</label>
+        <input type="text" id="node-input-service" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-data"><i class="fa fa-dot-circle-o"></i> Data</label>
+        <input type="text" id="node-input-data" style="width: 70%" />
+    </div>
+</script>
+
+
+<script type="text/html" data-help-name="xcommand">
+    <p>Connects to a telepresence endpoint and sends a command</p>
+    <h3>Inputs</h3>
+        <dl class="message-properties">
+            <dt class="optional">service
+                <span class="property-type">string</span>
+            </dt>
+            <dd>
+                <p>If not configured in the node, this optional property sets the service.</p>
+                <p>A full list of the available services can be found by running "xcommand ?" on the endpoint. </p>      
+            </dd>
+        </dl>
+        <dl class="message-properties">
+            <dt class="optional">data
+                <span class="property-type">string | json</span>
+            </dt>
+            <dd>If not configured in the node, this optional property sets the data.</dd>
+        </dl>
+    <h3>Outputs</h3>
+        <dl class="message-properties">
+            <dt>payload
+                <span class="property-type">object</span>
+            </dt>
+            <dd>The result of the command.</dd>
+        </dl>
+
+    <h3>Details</h3>
+        <p>Usage: To setup a call</p>
+        <p style="text-indent: 20px">service: Dial</p>
+        <p style="text-indent: 20px">data: { "Number": "user@example.com" }</p>
+
+        <p>This node requires a connection to an endpoint. This is configured by clicking the pencil icon.
+            Several telepresence nodes can share the same endpoint connection if required.
+ </script>

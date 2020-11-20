@@ -1,0 +1,27 @@
+{
+  "name": "red-contrib-telepresence",
+  "version": "1.0.0",
+  "description": "control telepresence endpoints",
+  "main": "make-call.js",
+  "dependencies": {
+    "jsxapi": "5.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roguenorman/node-red-contrib-telepresence.git"
+  },
+  "node-red": {
+    "nodes": {
+      "config-endpoint": "config-endpoint.js",
+      "xevent": "xevent.js",
+      "xstatus": "xstatus.js",
+      "xcommand": "xcommand.js"
+    }
+  },
+  "author": "David Norman",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/roguenorman/node-red-contrib-telepresence/issues"
+  },
+  "homepage": "https://github.com/roguenorman/node-red-contrib-telepresence#readme"
+}

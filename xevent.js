@@ -15,22 +15,26 @@ module.exports = function(RED) {
         this.on('input', function(msg, send, done) {
             send = send || function() { node.send.apply(node,arguments) }
 
-            if (msg.hasOwnProperty("payload")) {
+            // locally configured path should trump msg.payload
+            // if local node does not have a path configured, try to get path from msg.payload
+            if (node.event === "" && msg.hasOwnProperty("payload")){
                 if (typeof msg.payload === "string"){
                     node.event = msg.payload;
                 }
             }
+
             if (node.event != ""){
                 this.log("xevent.subscribed: " + node.event);
                 node.off = this.endpoint.xapi.event
                 .on(node.event, (event) => {
-                    msg.payload = {event: event};
+                    msg.payload = event;
+                    msg.payload.Event = node.event;
                     send(msg);
                     return
                 });
 
-                msg.payload = {"event" : node.event, "listening": true };
-                send(msg)
+                //msg.payload = {"event" : node.event, "listening": true };
+                //send(msg)
 
 
                 if (done) {

@@ -3,6 +3,7 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,config);
         this.endpoint = RED.nodes.getNode(config.endpoint);
         this.event = config.event;
+        this.output = config.output;
         var node = this;
         this.off = Object;
 
@@ -22,15 +23,17 @@ module.exports = function(RED) {
                     node.event = msg.payload;
                 }
             }
+            if (node.output === ""){
+                node.output = "payload"
+            }
 
             if (node.event != ""){
                 this.log("xevent.subscribed: " + node.event);
                 node.off = this.endpoint.xapi.event
-                .on(node.event, (event) => {
-                    msg.payload = event;
-                    msg.payload.Event = node.event;
+                .on(node.event, (response) => {
+                    this.log("xevent.ouptut: " + this.output);
+                    msg[node.output] = response;
                     send(msg);
-                    return
                 });
 
                 //msg.payload = {"event" : node.event, "listening": true };

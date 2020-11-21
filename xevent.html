@@ -6,12 +6,19 @@
             name: {value:""},
             event: {value:""},
             endpoint: {value:"", type:"config-endpoint"},
+            output: {value:"payload"}
         },
         inputs:1,
         outputs:1,
         icon: "alert.svg",
         label: function() {
             return this.name||"xevent";
+        },
+        oneditprepare: function() {
+            $("#node-input-output").typedInput({
+                type:"msg",
+                types:["msg", "flow", "global"]
+            });
         }
     });
 </script>
@@ -22,12 +29,16 @@
         <input type="text" id="node-input-name" placeholder="Optional name">
     </div>
     <div class="form-row">
-        <label for="node-input-endpoint"><i class="fa fa-tag"></i> Endpoint</label>
+        <label for="node-input-endpoint"><i class="fa fa-globe"></i> Endpoint</label>
         <input type="text" id="node-input-endpoint">
     </div>
     <div class="form-row">
         <label for="node-input-event"><i class="fa fa-tag"></i> Event</label>
         <input type="text" id="node-input-event" placeholder="Event to listen to">
+    </div>
+    <div class="form-row">
+        <label for="node-input-output"><i class="fa fa-sign-out"></i> Output to</label>
+        <input type="text" id="node-input-output" placeholder="payload">
     </div>
 </script>
 

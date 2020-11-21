@@ -4,6 +4,7 @@ module.exports = function(RED) {
         this.endpoint = RED.nodes.getNode(config.endpoint);
         this.service = config.service;
         this.data = config.data;
+        this.output = config.output;
         var node = this;
 
 
@@ -22,6 +23,9 @@ module.exports = function(RED) {
                     if (typeof msg.service === "string"){ 
                     node.service = msg.service; 
                 }
+            }
+            if (node.output === ""){
+                node.output = "payload"
             }
 
             if (node.data === "" && msg.hasOwnProperty("data")){
@@ -42,7 +46,7 @@ module.exports = function(RED) {
                 this.endpoint.xapi
                 .command(node.service, json) 
                 .then((response) => {
-                    msg.payload = response;
+                    msg[node.output] = response;
                     send(msg); 
                 })
                 .catch((error) => { 

@@ -6,7 +6,8 @@
             name: {value:""},
             endpoint: {value:"", type:"config-endpoint"},
             service: {value:""},
-            data: {value:""}
+            data: {value:""},
+            output: {value:"payload"}
         },
         inputs:1,
         outputs:1,
@@ -18,6 +19,10 @@
             $("#node-input-data").typedInput({
                 type:"json",
                 types:["json"]
+            }),
+            $("#node-input-output").typedInput({
+                type:"msg",
+                types:["msg", "flow", "global"]
             });
         }
     });
@@ -31,7 +36,7 @@
         <input type="text" id="node-input-name" placeholder="Optional name">
     </div>
     <div class="form-row">
-        <label for="node-input-endpoint"><i class="fa fa-tag"></i> Endpoint</label>
+        <label for="node-input-endpoint"><i class="fa fa-globe"></i> Endpoint</label>
         <input type="text" id="node-input-endpoint">
     </div>
     <div class="form-row">
@@ -41,6 +46,10 @@
     <div class="form-row">
         <label for="node-input-data"><i class="fa fa-dot-circle-o"></i> Data</label>
         <input type="text" id="node-input-data" style="width: 70%" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-output"><i class="fa fa-sign-out"></i> Output to</label>
+        <input type="text" id="node-input-output" placeholder="payload">
     </div>
 </script>
 

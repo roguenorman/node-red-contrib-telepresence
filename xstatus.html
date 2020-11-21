@@ -7,12 +7,19 @@
             event: {value:""},
             path: {value:""},
             endpoint: {value:"", type:"config-endpoint"},
+            output: {value:"payload"}
         },
         inputs:1,
         outputs:1,
         icon: "font-awesome/fa-info",
         label: function() {
             return this.name||"xstatus";
+        },
+        oneditprepare: function() {
+            $("#node-input-output").typedInput({
+                type:"msg",
+                types:["msg", "flow", "global"]
+            });
         }
     });
 </script>
@@ -23,12 +30,16 @@
         <input type="text" id="node-input-name" placeholder="Optional name">
     </div>
     <div class="form-row">
-        <label for="node-input-endpoint"><i class="fa fa-tag"></i> Endpoint</label>
+        <label for="node-input-endpoint"><i class="fa fa-globe"></i> Endpoint</label>
         <input type="text" id="node-input-endpoint">
     </div>
     <div class="form-row">
         <label for="node-input-path"><i class="fa fa-tag"></i> Path</label>
         <input type="text" id="node-input-path" placeholder="Status you want to retrieve">
+    </div>
+    <div class="form-row">
+        <label for="node-input-output"><i class="fa fa-sign-out"></i> Output to</label>
+        <input type="text" id="node-input-output" placeholder="payload">
     </div>
 </script>
 
